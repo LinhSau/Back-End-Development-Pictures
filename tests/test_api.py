@@ -63,8 +63,9 @@ def test_update_picture_by_id(client, picture):
     id = '2'
     res = client.get(f'/picture/{id}')
     res_picture = res.json
+    # print(res_picture["event_state"])
     assert res_picture['id'] == 2
-    res_state = res_picture["event_state"]
+    res_state = res_picture.get("event_state")
     new_state = "*" + res_state
     res_picture["event_state"] = new_state
     res = client.put(f'/picture/{id}', data=json.dumps(res_picture),
